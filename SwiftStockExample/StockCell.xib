@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14A379b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="stockCell" rowHeight="60" id="KGk-i7-Jjw" customClass="StockCell" customModule="SwiftStockExample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="F" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch4-vS-aN2">
+                        <rect key="frame" x="8" y="9" width="149" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="4sj-8z-Ckt"/>
+                            <constraint firstAttribute="width" constant="149" id="msG-Z1-358"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ford Motor Company" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMo-I1-xSw">
+                        <rect key="frame" x="8" y="34" width="140" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="eyp-sE-mqo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" red="0.49917685249999999" green="0.1944865352" blue="0.77761243390000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NYSE  |  Equity" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBI-lt-naG">
+                        <rect key="frame" x="195" y="34" width="117" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="WLY-j3-6yb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" red="0.49917685249999999" green="0.1944865352" blue="0.77761243390000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="bTh-MQ-6Id">
+                        <rect key="frame" x="294" y="10" width="20" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="0xR-ZJ-Qdn"/>
+                            <constraint firstAttribute="width" constant="20" id="9YR-y8-cbw"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="mMo-I1-xSw" secondAttribute="trailing" constant="164" id="BTq-HV-y6Q"/>
+                    <constraint firstItem="mMo-I1-xSw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="DbS-ZZ-sG9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bTh-MQ-6Id" secondAttribute="trailing" constant="-2" id="Oqd-e8-BpK"/>
+                    <constraint firstItem="bTh-MQ-6Id" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="To8-KK-MA8"/>
+                    <constraint firstItem="vBI-lt-naG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="187" id="Wd6-Fi-plZ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="mMo-I1-xSw" secondAttribute="bottom" constant="-4" id="bua-N5-Xbo"/>
+                    <constraint firstItem="Ch4-vS-aN2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="caK-AA-VfP"/>
+                    <constraint firstItem="vBI-lt-naG" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="h8T-Sb-fMh"/>
+                    <constraint firstItem="Ch4-vS-aN2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="n3Y-b0-TiT"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="vBI-lt-naG" secondAttribute="bottom" constant="-4" id="uCB-gd-nsA"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="companyLbl" destination="mMo-I1-xSw" id="kLo-Ls-vkt"/>
+                <outlet property="infoLbl" destination="vBI-lt-naG" id="01J-ku-Win"/>
+                <outlet property="symbolLbl" destination="Ch4-vS-aN2" id="bfK-Ql-PWc"/>
+            </connections>
+            <point key="canvasLocation" x="289" y="137"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow" width="50" height="50"/>
+    </resources>
+</document>

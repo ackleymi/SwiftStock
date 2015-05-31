@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A379b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HhY-WL-1e6">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--SwiftStock-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="SwiftStockExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,11 +16,102 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LwT-1w-c40">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="THu-c5-NcV">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <color key="tintColor" red="0.49917685249999999" green="0.1944865352" blue="0.77761243390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="THu-c5-NcV" secondAttribute="trailing" constant="-16" id="1jY-23-14z"/>
+                            <constraint firstItem="LwT-1w-c40" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="Avl-N5-ALG"/>
+                            <constraint firstItem="THu-c5-NcV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="RL5-uH-vph"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LwT-1w-c40" secondAttribute="trailing" constant="-16" id="SFo-Mp-7ta"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="LwT-1w-c40" secondAttribute="bottom" id="bUg-9H-VAw"/>
+                            <constraint firstItem="LwT-1w-c40" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="efN-Pw-lhw"/>
+                            <constraint firstItem="THu-c5-NcV" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="zdr-IE-SxB"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="SwiftStock" id="z74-2B-Wej">
+                        <barButtonItem key="backBarButtonItem" title="  " id="wjr-c5-D3f"/>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="searchBar" destination="THu-c5-NcV" id="Rys-Fd-M1A"/>
+                        <outlet property="tableView" destination="LwT-1w-c40" id="uZS-h8-BCh"/>
+                        <outlet property="tableViewBottomConstraint" destination="bUg-9H-VAw" id="SGt-wG-oIQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1156" y="242"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3S3-l3-Irk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HhY-WL-1e6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8rx-5p-Fqh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Cgg-Ow-Ej3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TpR-Qm-JmS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="344" y="242"/>
+        </scene>
+        <!--SwiftStock-->
+        <scene sceneID="Jfw-3p-pTF">
+            <objects>
+                <viewController storyboardIdentifier="detailViewController" id="jE8-k2-yLe" customClass="DetailViewController" customModule="SwiftStockExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6JG-WP-QoD"/>
+                        <viewControllerLayoutGuide type="bottom" id="var-Z2-JBY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xGf-5w-6Dl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sc8-NL-OxK">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="E7G-hg-tW4">
+                                    <size key="itemSize" width="185" height="44"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="var-Z2-JBY" firstAttribute="top" secondItem="sc8-NL-OxK" secondAttribute="bottom" id="Tnc-lQ-Xav"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sc8-NL-OxK" secondAttribute="trailing" constant="-16" id="YWV-WU-K8k"/>
+                            <constraint firstItem="sc8-NL-OxK" firstAttribute="top" secondItem="6JG-WP-QoD" secondAttribute="bottom" id="nge-ba-3cG"/>
+                            <constraint firstItem="sc8-NL-OxK" firstAttribute="leading" secondItem="xGf-5w-6Dl" secondAttribute="leadingMargin" constant="-16" id="rtj-ld-e1K"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="SwiftStock" id="N8a-Yz-0MR"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="collectionView" destination="sc8-NL-OxK" id="Hmp-R7-8v7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R57-hG-81V" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800" y="242"/>
         </scene>
     </scenes>
 </document>

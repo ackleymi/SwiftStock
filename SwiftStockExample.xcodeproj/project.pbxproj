@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED3CAE591B17EB8700E9A7CC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3CAE581B17EB8700E9A7CC /* ChartView.swift */; };
+		ED3CAE5B1B17EBA600E9A7CC /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3CAE5A1B17EBA600E9A7CC /* ChartView.xib */; };
+		ED49047E1AF970B600765F04 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED49047D1AF970B600765F04 /* DetailViewController.swift */; };
+		ED4904831AF98B1900765F04 /* StockDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4904811AF98B1900765F04 /* StockDataCell.swift */; };
+		ED4904841AF98B1900765F04 /* StockDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4904821AF98B1900765F04 /* StockDataCell.xib */; };
 		EDBE74941AF6FF8600EF79AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE74931AF6FF8600EF79AB /* AppDelegate.swift */; };
 		EDBE74961AF6FF8600EF79AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE74951AF6FF8600EF79AB /* ViewController.swift */; };
 		EDBE74991AF6FF8600EF79AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBE74971AF6FF8600EF79AB /* Main.storyboard */; };
 		EDBE749B1AF6FF8600EF79AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBE749A1AF6FF8600EF79AB /* Images.xcassets */; };
 		EDBE749E1AF6FF8600EF79AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBE749C1AF6FF8600EF79AB /* LaunchScreen.xib */; };
 		EDBE74AA1AF6FF8600EF79AB /* SwiftStockExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE74A91AF6FF8600EF79AB /* SwiftStockExampleTests.swift */; };
+		EDBE74B41AF70C7F00EF79AB /* SwiftStockKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE74B31AF70C7F00EF79AB /* SwiftStockKit.swift */; };
+		EDBE74B71AF70D8F00EF79AB /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE74B51AF70D8F00EF79AB /* StockCell.swift */; };
+		EDBE74B81AF70D8F00EF79AB /* StockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBE74B61AF70D8F00EF79AB /* StockCell.xib */; };
+		EDBE74C21AF7129E00EF79AB /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE74C11AF7129E00EF79AB /* Alamofire.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +35,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED3CAE581B17EB8700E9A7CC /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		ED3CAE5A1B17EBA600E9A7CC /* ChartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
+		ED49047D1AF970B600765F04 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		ED4904811AF98B1900765F04 /* StockDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockDataCell.swift; sourceTree = "<group>"; };
+		ED4904821AF98B1900765F04 /* StockDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockDataCell.xib; sourceTree = "<group>"; };
 		EDBE748E1AF6FF8600EF79AB /* SwiftStockExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftStockExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBE74921AF6FF8600EF79AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBE74931AF6FF8600EF79AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +50,10 @@
 		EDBE74A31AF6FF8600EF79AB /* SwiftStockExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftStockExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDBE74A81AF6FF8600EF79AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDBE74A91AF6FF8600EF79AB /* SwiftStockExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftStockExampleTests.swift; sourceTree = "<group>"; };
+		EDBE74B31AF70C7F00EF79AB /* SwiftStockKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftStockKit.swift; sourceTree = "<group>"; };
+		EDBE74B51AF70D8F00EF79AB /* StockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
+		EDBE74B61AF70D8F00EF79AB /* StockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StockCell.xib; sourceTree = "<group>"; };
+		EDBE74C11AF7129E00EF79AB /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +74,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED49047F1AF975CC00765F04 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EDBE74B51AF70D8F00EF79AB /* StockCell.swift */,
+				EDBE74B61AF70D8F00EF79AB /* StockCell.xib */,
+				ED4904811AF98B1900765F04 /* StockDataCell.swift */,
+				ED4904821AF98B1900765F04 /* StockDataCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		ED4904801AF975DB00765F04 /* SwiftStock */ = {
+			isa = PBXGroup;
+			children = (
+				EDBE74C11AF7129E00EF79AB /* Alamofire.swift */,
+				EDBE74B31AF70C7F00EF79AB /* SwiftStockKit.swift */,
+			);
+			name = SwiftStock;
+			sourceTree = "<group>";
+		};
 		EDBE74851AF6FF8600EF79AB = {
 			isa = PBXGroup;
 			children = (
@@ -77,11 +115,14 @@
 		EDBE74901AF6FF8600EF79AB /* SwiftStockExample */ = {
 			isa = PBXGroup;
 			children = (
+				ED4904801AF975DB00765F04 /* SwiftStock */,
 				EDBE74931AF6FF8600EF79AB /* AppDelegate.swift */,
-				EDBE74951AF6FF8600EF79AB /* ViewController.swift */,
 				EDBE74971AF6FF8600EF79AB /* Main.storyboard */,
-				EDBE749A1AF6FF8600EF79AB /* Images.xcassets */,
-				EDBE749C1AF6FF8600EF79AB /* LaunchScreen.xib */,
+				EDBE74951AF6FF8600EF79AB /* ViewController.swift */,
+				ED49047D1AF970B600765F04 /* DetailViewController.swift */,
+				ED3CAE581B17EB8700E9A7CC /* ChartView.swift */,
+				ED3CAE5A1B17EBA600E9A7CC /* ChartView.xib */,
+				ED49047F1AF975CC00765F04 /* Cells */,
 				EDBE74911AF6FF8600EF79AB /* Supporting Files */,
 			);
 			path = SwiftStockExample;
@@ -90,6 +131,8 @@
 		EDBE74911AF6FF8600EF79AB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EDBE749A1AF6FF8600EF79AB /* Images.xcassets */,
+				EDBE749C1AF6FF8600EF79AB /* LaunchScreen.xib */,
 				EDBE74921AF6FF8600EF79AB /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -193,7 +236,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBE74991AF6FF8600EF79AB /* Main.storyboard in Resources */,
+				ED4904841AF98B1900765F04 /* StockDataCell.xib in Resources */,
 				EDBE749E1AF6FF8600EF79AB /* LaunchScreen.xib in Resources */,
+				ED3CAE5B1B17EBA600E9A7CC /* ChartView.xib in Resources */,
+				EDBE74B81AF70D8F00EF79AB /* StockCell.xib in Resources */,
 				EDBE749B1AF6FF8600EF79AB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,8 +258,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBE74C21AF7129E00EF79AB /* Alamofire.swift in Sources */,
+				ED4904831AF98B1900765F04 /* StockDataCell.swift in Sources */,
+				EDBE74B41AF70C7F00EF79AB /* SwiftStockKit.swift in Sources */,
 				EDBE74961AF6FF8600EF79AB /* ViewController.swift in Sources */,
+				EDBE74B71AF70D8F00EF79AB /* StockCell.swift in Sources */,
 				EDBE74941AF6FF8600EF79AB /* AppDelegate.swift in Sources */,
+				ED49047E1AF970B600765F04 /* DetailViewController.swift in Sources */,
+				ED3CAE591B17EB8700E9A7CC /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +461,7 @@
 				EDBE74AF1AF6FF8600EF79AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EDBE74B01AF6FF8600EF79AB /* Build configuration list for PBXNativeTarget "SwiftStockExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +470,7 @@
 				EDBE74B21AF6FF8600EF79AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
