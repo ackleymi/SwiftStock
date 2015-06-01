@@ -87,7 +87,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    
     func keyboardWillShow(sender: NSNotification) {
         if let userInfo = sender.userInfo {
             if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {

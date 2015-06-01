@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LwT-1w-c40">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="THu-c5-NcV">
@@ -30,7 +30,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="THu-c5-NcV" secondAttribute="trailing" constant="-16" id="1jY-23-14z"/>
-                            <constraint firstItem="LwT-1w-c40" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="Avl-N5-ALG"/>
+                            <constraint firstItem="LwT-1w-c40" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="44" id="Avl-N5-ALG"/>
                             <constraint firstItem="THu-c5-NcV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="RL5-uH-vph"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LwT-1w-c40" secondAttribute="trailing" constant="-16" id="SFo-Mp-7ta"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="LwT-1w-c40" secondAttribute="bottom" id="bUg-9H-VAw"/>
