@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AA85E048-E4A4-45CA-9A29-92E5706EAA9F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SwiftStockExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9B06B89DB300B4BECC3A3F7AF26A450733ECA25D</key>
+		<string>https://github.com/ackleymi/SwiftStock.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SwiftStockExample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9B06B89DB300B4BECC3A3F7AF26A450733ECA25D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ackleymi/SwiftStock.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9B06B89DB300B4BECC3A3F7AF26A450733ECA25D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9B06B89DB300B4BECC3A3F7AF26A450733ECA25D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SwiftStockExample</string>
+		</dict>
+	</array>
+</dict>
+</plist>
