@@ -1,12 +1,29 @@
+
+// The MIT License (MIT)
 //
-//  SwiftStockKit.swift
-//  SwiftStockExample
+// Copyright (c) 2016 Michael Ackley (ackleymi@gmail.com)
 //
-//  Created by Mike Ackley on 5/3/15.
-//  Copyright (c) 2015 Michael Ackley. All rights reserved.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 
 import UIKit
+import Alamofire
 
 struct StockSearchResult {
     var symbol: String?
@@ -75,53 +92,42 @@ enum ChartTimeRange {
 
 class SwiftStockKit {
     
-    class func fetchStocksFromSearchTerm(#term: String, completion:(stockInfoArray: [StockSearchResult]) -> ()) {
-    
+    class func fetchStocksFromSearchTerm(term term: String, completion:(stockInfoArray: [StockSearchResult]) -> ()) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             
-            var searchURL = "http://d.yimg.com/autoc.finance.yahoo.com/autoc?query=\(term)&callback=YAHOO.Finance.SymbolSuggest.ssCallback"
-            
-            request(.GET, searchURL)
-                .responseString { (_, response, resultString, _) in
-                   
-                    if response?.statusCode == 200 {
-                        
-                        //Bummer that Yahoo Finance requires a JSONP callback function be included. Remove it!
-                        var jsonString = resultString! as NSString
-                            jsonString = jsonString.substringFromIndex(39)
-                            jsonString = jsonString.substringToIndex(jsonString.length-1)
-                        
-                        if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
-                            if let resultJSON = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: nil)  as? [String : AnyObject] {
+            let searchURL = "http://autoc.finance.yahoo.com/autoc"
 
-                                let jsonArray = (resultJSON["ResultSet"] as! [String : AnyObject])["Result"]! as! [[String : String]]
-                                var stockInfoArray = [StockSearchResult]()
-                                
-                                for dictionary in jsonArray {
-                                    stockInfoArray.append(StockSearchResult(symbol: dictionary["symbol"], name: dictionary["name"], exchange: dictionary["exchDisp"], assetType: dictionary["typeDisp"]))
-                                }
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    completion(stockInfoArray: stockInfoArray)
-                                }
-                            }
+            Alamofire.request(.GET, searchURL, parameters: ["query": term, "region": 2, "lang": "en"]).responseJSON { response in
+                
+                if let resultJSON = response.result.value as? [String : AnyObject]  {
+                   
+                    if let jsonArray = (resultJSON["ResultSet"] as! [String : AnyObject])["Result"] as? [[String : String]] {
+                   
+                        var stockInfoArray = [StockSearchResult]()
+                        for dictionary in jsonArray {
+                            stockInfoArray.append(StockSearchResult(symbol: dictionary["symbol"], name: dictionary["name"], exchange: dictionary["exchDisp"], assetType: dictionary["typeDisp"]))
+                        }
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            completion(stockInfoArray: stockInfoArray)
                         }
                     }
+                }
             }
         }
     }
     
-    class func fetchStockForSymbol(#symbol: String, completion:(stock: Stock) -> ()) {
+    class func fetchStockForSymbol(symbol symbol: String, completion:(stock: Stock) -> ()) {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
         
-            var stockURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22\(symbol)%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json"
-            
-            request(.GET, stockURL)
-                .responseJSON { (_, response, resultsJSON, _) in
-               
-                if response?.statusCode == 200 {
+            let stockURL = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22\(symbol)%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json"
                     
-                    if let stockData = (((resultsJSON as! [String : AnyObject])["query"] as! [String : AnyObject])["results"] as! [String : AnyObject])["quote"] as? [String : AnyObject] {
+            Alamofire.request(.GET, stockURL).responseJSON { response in
+               
+                if let resultJSON = response.result.value as? [String : AnyObject]  {
+                    
+                    if let stockData = ((resultJSON["query"] as! [String : AnyObject])["results"] as! [String : AnyObject])["quote"] as? [String : AnyObject] {
                     
                         // lengthy creation, yeah
                         var dataFields = [[String : String]]()
@@ -163,41 +169,41 @@ class SwiftStockKit {
                         dataFields.append(["52w Low" : stockData["YearLow"] as? String ?? "N/A"])
 
                         let stock = Stock(
-                            ask: dataFields[0].values.array[0],
-                            averageDailyVolume: dataFields[1].values.array[0],
-                            bid: dataFields[2].values.array[0],
-                            bookValue: dataFields[3].values.array[0],
-                            changeNumeric: dataFields[4].values.array[0],
-                            changePercent: dataFields[5].values.array[0],
-                            dayHigh: dataFields[6].values.array[0],
-                            dayLow: dataFields[7].values.array[0],
-                            dividendShare: dataFields[8].values.array[0],
-                            dividendYield: dataFields[9].values.array[0],
-                            ebitda: dataFields[10].values.array[0],
-                            epsEstimateCurrentYear: dataFields[11].values.array[0],
-                            epsEstimateNextQtr: dataFields[12].values.array[0],
-                            epsEstimateNextYr: dataFields[13].values.array[0],
-                            eps: dataFields[14].values.array[0],
-                            fiftydayMovingAverage: dataFields[15].values.array[0],
-                            lastTradeDate: dataFields[16].values.array[0],
-                            last: dataFields[17].values.array[0],
-                            lastTradeTime: dataFields[18].values.array[0],
-                            marketCap: dataFields[19].values.array[0],
-                            companyName: dataFields[20].values.array[0],
-                            oneYearTarget: dataFields[21].values.array[0],
-                            open: dataFields[22].values.array[0],
-                            pegRatio: dataFields[23].values.array[0],
-                            peRatio: dataFields[24].values.array[0],
-                            previousClose: dataFields[25].values.array[0],
-                            priceBook: dataFields[26].values.array[0],
-                            priceSales: dataFields[27].values.array[0],
-                            shortRatio: dataFields[28].values.array[0],
-                            stockExchange: dataFields[29].values.array[0],
-                            symbol: dataFields[30].values.array[0],
-                            twoHundreddayMovingAverage: dataFields[31].values.array[0],
-                            volume: dataFields[32].values.array[0],
-                            yearHigh: dataFields[33].values.array[0],
-                            yearLow: dataFields[34].values.array[0],
+                            ask: dataFields[0].values.first,
+                            averageDailyVolume: dataFields[1].values.first,
+                            bid: dataFields[2].values.first,
+                            bookValue: dataFields[3].values.first,
+                            changeNumeric: dataFields[4].values.first,
+                            changePercent: dataFields[5].values.first,
+                            dayHigh: dataFields[6].values.first,
+                            dayLow: dataFields[7].values.first,
+                            dividendShare: dataFields[8].values.first,
+                            dividendYield: dataFields[9].values.first,
+                            ebitda: dataFields[10].values.first,
+                            epsEstimateCurrentYear: dataFields[11].values.first,
+                            epsEstimateNextQtr: dataFields[12].values.first,
+                            epsEstimateNextYr: dataFields[13].values.first,
+                            eps: dataFields[14].values.first,
+                            fiftydayMovingAverage: dataFields[15].values.first,
+                            lastTradeDate: dataFields[16].values.first,
+                            last: dataFields[17].values.first,
+                            lastTradeTime: dataFields[18].values.first,
+                            marketCap: dataFields[19].values.first,
+                            companyName: dataFields[20].values.first,
+                            oneYearTarget: dataFields[21].values.first,
+                            open: dataFields[22].values.first,
+                            pegRatio: dataFields[23].values.first,
+                            peRatio: dataFields[24].values.first,
+                            previousClose: dataFields[25].values.first,
+                            priceBook: dataFields[26].values.first,
+                            priceSales: dataFields[27].values.first,
+                            shortRatio: dataFields[28].values.first,
+                            stockExchange: dataFields[29].values.first,
+                            symbol: dataFields[30].values.first,
+                            twoHundreddayMovingAverage: dataFields[31].values.first,
+                            volume: dataFields[32].values.first,
+                            yearHigh: dataFields[33].values.first,
+                            yearLow: dataFields[34].values.first,
                             dataFields: dataFields
                         )
                         dispatch_async(dispatch_get_main_queue()) {
@@ -209,29 +215,30 @@ class SwiftStockKit {
         }
     }
    
-    class func fetchChartPoints(#symbol: String, range: ChartTimeRange, completion:(chartPoints: [ChartPoint]) -> ()) {
+    class func fetchChartPoints(symbol symbol: String, range: ChartTimeRange, completion:(chartPoints: [ChartPoint]) -> ()) {
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             
-            //An Alamofire regular responseJSON wont parse the JSONP with a callback wrapper correctly, so lets work around that
-            var chartURL = SwiftStockKit.chartUrlForRange(symbol, range: range)
-            request(.GET, chartURL).response() {
-                (request, response, data, error) in
+            //An Alamofire regular responseJSON wont parse the JSONP with a callback wrapper correctly, so lets work around that.
+            let chartURL = SwiftStockKit.chartUrlForRange(symbol, range: range)
+            
+            Alamofire.request(.GET, chartURL).responseData { response in
   
-               if response?.statusCode == 200 {
+                if let data = response.result.value {
+
+                    var jsonString =  NSString(data: data, encoding: NSUTF8StringEncoding)!
                     
-                    var jsonString =  NSString(data: data as! NSData, encoding: NSUTF8StringEncoding)!
                     jsonString = jsonString.substringFromIndex(30)
                     jsonString = jsonString.substringToIndex(jsonString.length-1)
                     
                     if let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding) {
-                        if let resultJSON = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: nil)  as? [String : AnyObject] {
+                        if let resultJSON = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)))  as? [String : AnyObject] {
                         
                             let series = resultJSON["series"] as! [[String : AnyObject]]
                             var chartPoints = [ChartPoint]()
                             for dataPoint in series {
-                                //GMT off by 4 hrs
-                                 let date = NSDate(timeIntervalSince1970: (dataPoint["Timestamp"] as? Double ?? dataPoint["Date"] as! Double) - 14400.0)
+                                //GMT off by 5 hrs
+                                 let date = NSDate(timeIntervalSince1970: (dataPoint["Timestamp"] as? Double ?? dataPoint["Date"] as! Double) - 18000.0)
                                 
                                 chartPoints.append(
                                     ChartPoint(
@@ -354,7 +361,7 @@ class SwiftStockChart: UIView {
     //Implementation
     
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -394,7 +401,7 @@ class SwiftStockChart: UIView {
 
     }
     
-    func setChartPoints(#points: [ChartPoint]) {
+    func setChartPoints(points points: [ChartPoint]) {
     
         if points.isEmpty { return }
         
@@ -421,7 +428,7 @@ class SwiftStockChart: UIView {
             let xPadding = 6
             let xOffset = width + CGFloat(xPadding)
             
-            var label = UILabel(frame: CGRectMake(p.x - xOffset + 5.0, p.y, width + 2, 14))
+            let label = UILabel(frame: CGRectMake(p.x - xOffset + 5.0, p.y, width + 2, 14))
             label.text = text
             label.font = valueLabelFont
             label.textColor = valueLabelTextColor
@@ -446,10 +453,7 @@ class SwiftStockChart: UIView {
                 attributes:[NSFontAttributeName : indexLabelFont!],
                 context: nil).size.width
             
-            let xPadding = 6
-            let xOffset = width + CGFloat(xPadding)
-            
-            var label = UILabel(frame: CGRectMake(p.x - 5.0, p.y + 5.0, width + 2, 14))
+            let label = UILabel(frame: CGRectMake(p.x - 5.0, p.y + 5.0, width + 2, 14))
             label.text = text
             label.font = indexLabelFont!
             label.textAlignment = .Left
@@ -479,7 +483,7 @@ class SwiftStockChart: UIView {
         if drawInnerGrid! {
             
             let ctx = UIGraphicsGetCurrentContext()
-            UIGraphicsPushContext(ctx)
+            UIGraphicsPushContext(ctx!)
             CGContextSetLineWidth(ctx, axisLineWidth!)
             CGContextSetStrokeColorWithColor(ctx, axisColor!.CGColor)
             
@@ -547,7 +551,7 @@ class SwiftStockChart: UIView {
         
         let path = getLinePath(scale: scale, smoothing: bezierSmoothing!, close: false)
         
-        var pathLayer = CAShapeLayer()
+        let pathLayer = CAShapeLayer()
         pathLayer.frame = CGRectMake(self.bounds.origin.x, self.bounds.origin.y + (margin! * 1.2), self.bounds.size.width, self.bounds.size.height)
         pathLayer.bounds = self.bounds
         pathLayer.path = path.CGPath
@@ -628,7 +632,7 @@ class SwiftStockChart: UIView {
         }
     }
     
-    func getUpperRoundNumber(#value: CGFloat, gridStep: Int) -> CGFloat {
+    func getUpperRoundNumber(value value: CGFloat, gridStep: Int) -> CGFloat {
         if value <= 0.0 {
             return 0.0
         }
@@ -646,12 +650,12 @@ class SwiftStockChart: UIView {
         return n * CGFloat(scale) / 4.0
     }
     
-    func setGridStep(#gridStep: Int) {
+    func setGridStep(gridStep gridStep: Int) {
         verticalGridStep = gridStep
         horizontalGridStep = gridStep
     }
     
-    func getPointForData(#index: Int, scale: CGFloat) -> CGPoint {
+    func getPointForData(index index: Int, scale: CGFloat) -> CGPoint {
         if index < 0 || index >= dataPoints.count{
             return CGPointZero
         }
@@ -694,9 +698,9 @@ class SwiftStockChart: UIView {
         
     }
     
-    func getLinePath(#scale: CGFloat, smoothing: Bool, close: Bool) -> UIBezierPath {
+    func getLinePath(scale scale: CGFloat, smoothing: Bool, close: Bool) -> UIBezierPath {
     
-        var path = UIBezierPath()
+        let path = UIBezierPath()
 
         for var i = 0; i < dataPoints.count; i++ {
             if i > 0 {
@@ -717,7 +721,7 @@ class SwiftStockChart: UIView {
             return ["9:30am", "10", "11", "12pm", "1", "2", "3", "4"]
         case .FiveDays:
             
-           let weekday = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.components(.CalendarUnitWeekday, fromDate: NSDate()).weekday
+           let weekday = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.components(.Weekday, fromDate: NSDate()).weekday
            switch weekday {
            case 1:
             return ["Mon", "Tues", "Wed", "Thu", "Fri"]
@@ -736,7 +740,7 @@ class SwiftStockChart: UIView {
            default: ()
            }
         case .TenDays:
-            let weekday = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.components(.CalendarUnitWeekday, fromDate: NSDate()).weekday
+            let weekday = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.components(.Weekday, fromDate: NSDate()).weekday
             switch weekday {
                 //sunday
             case 1:
@@ -758,7 +762,7 @@ class SwiftStockChart: UIView {
             }
         case .OneMonth:
             
-            var fmt = NSDateFormatter()
+            let fmt = NSDateFormatter()
             fmt.dateFormat = "dd MMM"
             let offset = Double(-6*24*60*60)
             let start = NSDate()
@@ -770,7 +774,7 @@ class SwiftStockChart: UIView {
             
             return[firstString, secondString, thirdString, fourthString, fifthString, ""]
         case .ThreeMonths:
-            var fmt = NSDateFormatter()
+            let fmt = NSDateFormatter()
             fmt.dateFormat = "dd MMM"
             let offset = Double(-15*24*60*60)
             let start = NSDate()
@@ -782,7 +786,7 @@ class SwiftStockChart: UIView {
             
             return[firstString, secondString, thirdString, fourthString, fifthString, ""]
         case .OneYear:
-            var fmt = NSDateFormatter()
+            let fmt = NSDateFormatter()
             fmt.dateFormat = "MMM"
             let offset = Double(-80*24*60*60)
             let start = NSDate()
@@ -795,7 +799,7 @@ class SwiftStockChart: UIView {
             return[firstString, secondString, thirdString, fourthString, fifthString, ""]
 
         case .FiveYears:
-            var fmt = NSDateFormatter()
+            let fmt = NSDateFormatter()
             fmt.dateFormat = "yyyy"
             let offset = Double(-365*24*60*60)
             let start = NSDate()
@@ -806,8 +810,6 @@ class SwiftStockChart: UIView {
             let firstString = fmt.stringFromDate(start.dateByAddingTimeInterval(offset * 5))
             
             return[firstString, secondString, thirdString, fourthString, fifthString, ""]
-
-        default: ()
         }
         return []
     }

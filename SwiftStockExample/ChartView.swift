@@ -10,7 +10,7 @@ import UIKit
 
 protocol ChartViewDelegate {
 
-    func didChangeTimeRange(#range: ChartTimeRange)
+    func didChangeTimeRange(range range: ChartTimeRange)
 }
 
 class ChartView: UIView {
@@ -19,7 +19,7 @@ class ChartView: UIView {
     var delegate: ChartViewDelegate!
     
     class func create() -> ChartView {
-        var chartView = UINib(nibName: "ChartView", bundle:nil).instantiateWithOwner(nil, options: nil)[0] as! ChartView
+        let chartView = UINib(nibName: "ChartView", bundle:nil).instantiateWithOwner(nil, options: nil)[0] as! ChartView
         chartView.btnIndicatorView.layer.cornerRadius = 15
         
         return chartView
@@ -56,7 +56,7 @@ class ChartView: UIView {
         for view in subviews {
             
             if view.isMemberOfClass(UIButton) {
-                var subBtn = view as! UIButton
+                let subBtn = view as! UIButton
                 if btn.tag == subBtn.tag {
                     subBtn.setTitleColor(UIColor(red: (127/255), green: (50/255), blue: (198/255), alpha: 1), forState: .Normal)
                     subBtn.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 14)

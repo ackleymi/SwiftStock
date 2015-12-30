@@ -29,7 +29,7 @@ class DetailViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         
         chartView = ChartView.create()
         chartView.delegate = self
-        chartView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        chartView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(chartView)
         
         collectionView.addConstraint(NSLayoutConstraint(item: chartView, attribute: .Height, relatedBy: .Equal, toItem:collectionView, attribute: .Height, multiplier: 1.0, constant: -(collectionView.bounds.size.height - 230)))
@@ -59,7 +59,7 @@ class DetailViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     
     // *** ChartView stuff *** //
     
-    func loadChartWithRange(#range: ChartTimeRange) {
+    func loadChartWithRange(range range: ChartTimeRange) {
     
         chart.timeRange = range
         
@@ -82,7 +82,7 @@ class DetailViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     
     }
     
-    func didChangeTimeRange(#range: ChartTimeRange) {
+    func didChangeTimeRange(range range: ChartTimeRange) {
         loadChartWithRange(range: range)
     }
     

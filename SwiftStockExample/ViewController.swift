@@ -46,7 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // Search code
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
-        let length = count(searchText)
+        let length = searchText.characters.count
         
         if length > 0 {
             searchYahooFinanceWithString(searchText)
@@ -89,7 +89,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func keyboardWillShow(sender: NSNotification) {
         if let userInfo = sender.userInfo {
-            if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
+            if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
                 tableViewBottomConstraint.constant = keyboardHeight
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
                     self.view.layoutIfNeeded()
@@ -100,7 +100,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func keyboardWillHide(sender: NSNotification) {
         if let userInfo = sender.userInfo {
-            if let keyboardHeight = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
+            if let _ = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue.size.height {
                 tableViewBottomConstraint.constant = 0.0
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
                     self.view.layoutIfNeeded()
@@ -113,7 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //TableView stuff
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var controller: DetailViewController = storyboard?.instantiateViewControllerWithIdentifier("detailViewController") as! DetailViewController
+        let controller: DetailViewController = storyboard?.instantiateViewControllerWithIdentifier("detailViewController") as! DetailViewController
         controller.stockSymbol = searchResults[indexPath.row].symbol!
         navigationController?.pushViewController(controller, animated: true)
         
